@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>迷雾之塔 — 文字冒险</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
   *{margin:0;padding:0;box-sizing:border-box}
   :root{--bg:#0a0a12;--panel:#12121e;--border:#2a2a4a;--text:#d0d0e0;--text-dim:#7a7a9a;--accent:#c4a050;--accent-glow:rgba(196,160,80,0.15);--danger:#c04050;--success:#50a080;--info:#5090c0}
-  body{background:var(--bg);color:var(--text);font-family:'Noto Serif SC','SimSun',serif;min-height:100vh;display:flex;justify-content:center;align-items:center;background-image:radial-gradient(ellipse at 50% 0%,rgba(60,40,100,0.15) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(196,160,80,0.05) 0%,transparent 40%)}
+  body{background:var(--bg);color:var(--text);font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','STSong','SimSun',sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;background-image:radial-gradient(ellipse at 50% 0%,rgba(60,40,100,0.15) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(196,160,80,0.05) 0%,transparent 40%)}
   .container{width:100%;max-width:800px;height:100vh;padding:20px;display:flex;flex-direction:column}
   header{text-align:center;padding:16px 0;border-bottom:1px solid var(--border);flex-shrink:0}
   header h1{font-size:26px;font-weight:900;color:var(--accent);letter-spacing:8px;text-shadow:0 0 20px var(--accent-glow)}
@@ -50,7 +49,7 @@
   .fade-in{animation:fadeIn .5s ease-out}
   @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
   .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--accent);color:var(--accent);padding:10px 24px;border-radius:8px;font-size:14px;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
-  @media(max-width:600px){.container{padding:10px}header h1{font-size:20px;letter-spacing:4px}.scene-title{font-size:17px}.scene-text{font-size:14px}.choice-btn{padding:10px 12px;font-size:13px}.status-bar{font-size:12px;gap:12px}}
+  @media(max-width:768px){.container{padding:10px}header h1{font-size:20px;letter-spacing:4px}.scene-title{font-size:17px}.scene-text{font-size:15px;line-height:1.7}.choice-btn{padding:14px 14px;font-size:14px;margin-bottom:2px}.status-bar{font-size:12px;gap:12px}.bottom-bar button{padding:8px 12px;font-size:13px}.sponsor-card{padding:10px 12px}.sponsor-card .sponsor-btn{padding:10px 28px;font-size:14px}}}
   .sponsor-card{text-align:center;padding:14px 16px;background:linear-gradient(135deg,rgba(196,160,80,0.08) 0%,rgba(196,160,80,0.02) 100%);border:1px solid rgba(196,160,80,0.2);border-radius:8px;margin-top:10px;flex-shrink:0}
   .sponsor-card .sponsor-text{font-size:12px;color:var(--text-dim);line-height:1.6;margin-bottom:8px}
   .sponsor-card .sponsor-btn{display:inline-block;padding:8px 24px;background:rgba(196,160,80,0.15);border:1px solid var(--accent);color:var(--accent);border-radius:6px;font-family:inherit;font-size:13px;text-decoration:none;cursor:pointer;transition:all .25s;letter-spacing:2px}
@@ -80,6 +79,7 @@
     <button id="saveBtn">💾 存档</button>
     <button id="loadBtn">📂 读档</button>
     <button id="restartBtn">🔄 重来</button>
+    <button id="shareBtn">📤 分享</button>
   </div>
   <div class="sponsor-card">
     <div class="sponsor-text">如果喜欢这个游戏，欢迎支持作者持续创作 ✦</div>
@@ -1022,6 +1022,16 @@
   });
   document.getElementById('restartBtn').addEventListener('click', () => {
     if (confirm('确定要重新开始吗？')) restartGame();
+  });
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    const url = 'https://samouswolf.github.io/misty-tower/';
+    const title = '迷雾之塔 - 文字冒险游戏';
+    const text = '我在玩《迷雾之塔》，一座充满谜题和选择的高塔冒险！来试试看你能到达第几层？';
+    if (navigator.share) {
+      navigator.share({ title, text, url }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(url).then(() => showToast('📋 链接已复制，发送给朋友吧！')).catch(() => showToast('📋 链接: ' + url));
+    }
   });
 
   // Keyboard
