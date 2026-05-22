@@ -51,6 +51,10 @@
   @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
   .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--accent);color:var(--accent);padding:10px 24px;border-radius:8px;font-size:14px;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
   @media(max-width:600px){.container{padding:10px}header h1{font-size:20px;letter-spacing:4px}.scene-title{font-size:17px}.scene-text{font-size:14px}.choice-btn{padding:10px 12px;font-size:13px}.status-bar{font-size:12px;gap:12px}}
+  .sponsor-card{text-align:center;padding:14px 16px;background:linear-gradient(135deg,rgba(196,160,80,0.08) 0%,rgba(196,160,80,0.02) 100%);border:1px solid rgba(196,160,80,0.2);border-radius:8px;margin-top:10px;flex-shrink:0}
+  .sponsor-card .sponsor-text{font-size:12px;color:var(--text-dim);line-height:1.6;margin-bottom:8px}
+  .sponsor-card .sponsor-btn{display:inline-block;padding:8px 24px;background:rgba(196,160,80,0.15);border:1px solid var(--accent);color:var(--accent);border-radius:6px;font-family:inherit;font-size:13px;text-decoration:none;cursor:pointer;transition:all .25s;letter-spacing:2px}
+  .sponsor-card .sponsor-btn:hover{background:var(--accent);color:#0a0a12}
 </style>
 </head>
 <body>
@@ -76,6 +80,10 @@
     <button id="saveBtn">💾 存档</button>
     <button id="loadBtn">📂 读档</button>
     <button id="restartBtn">🔄 重来</button>
+  </div>
+  <div class="sponsor-card">
+    <div class="sponsor-text">如果喜欢这个游戏，欢迎支持作者持续创作 ✦</div>
+    <a class="sponsor-btn" href="https://afdian.com/a/YOUR_NAME" target="_blank">♥ 赞助支持</a>
   </div>
 </div>
 <script>
