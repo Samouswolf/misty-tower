@@ -4,7 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>迷雾之塔 — 文字冒险</title>
-<style> @import url('https:
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow-x:hidden}
+body{
+background:radial-gradient(ellipse at 50% 20%,rgba(30,20,60,.3),transparent 60%),
+radial-gradient(ellipse at 50% 80%,rgba(10,0,20,.5),transparent 50%),
+#0a0a14;
+color:#c8c0d8;
+font-family:"Noto Serif SC","Microsoft YaHei","PingFang SC",serif;
+display:flex;justify-content:center;align-items:flex-start;
+min-height:100vh;padding:16px;
+}
+.container{width:100%;max-width:680px;min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:28px 0 18px;border-bottom:1px solid rgba(180,160,220,.15);margin-bottom:14px}
+header h1{font-size:clamp(22px,5vw,32px);color:#d4c8f0;letter-spacing:6px;font-weight:700;text-shadow:0 0 24px rgba(150,120,220,.3)}
+.subtitle{color:#888;font-size:13px;letter-spacing:4px;margin-top:4px}
+.status-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.stat{background:rgba(20,15,35,.7);border:1px solid rgba(150,130,200,.15);border-radius:8px;padding:5px 12px;font-size:12px;text-align:center;min-width:60px}
+.stat .label{display:block;color:#787090;font-size:10px;text-transform:uppercase}
+.stat .value{display:block;color:#d4c8f0;font-size:16px;font-weight:600}
+.inventory-panel{background:rgba(15,10,25,.8);border:1px solid rgba(150,130,200,.12);border-radius:10px;padding:8px 14px;margin-bottom:10px;display:none}
+.inventory-panel.show{display:block}
+.inv-title{color:#b0a0d0;font-size:12px;letter-spacing:3px;margin-bottom:4px}
+.inv-items{display:flex;gap:6px;flex-wrap:wrap}
+.inv-items .item{background:rgba(150,130,200,.1);border:1px solid rgba(150,130,200,.2);border-radius:6px;padding:3px 10px;font-size:12px;color:#c0b8d8}
+.story-area{flex:1;line-height:2;font-size:15px;padding:8px 0 120px;overflow-y:auto}
+.story-area p{margin-bottom:10px;text-indent:2em}
+.story-area .highlight{color:#e0d060;font-weight:600}
+.story-area .success-text{color:#6bcb8a}
+.story-area .danger-text{color:#e06060}
+.story-area .info-text{color:#80a0e0}
+.story-area i{color:#b0a0c8}
+.story-area .scene-title{font-size:20px;font-weight:700;color:#d4c8f0;text-align:center;margin:16px 0;letter-spacing:4px;text-indent:0}
+.story-area .scene-divider{text-align:center;color:#484060;margin:12px 0;letter-spacing:6px;text-indent:0}
+.choice-btn{display:block;width:100%;padding:10px 16px;margin:4px 0;background:rgba(150,130,200,.08);border:1px solid rgba(150,130,200,.2);border-radius:8px;color:#c8c0d8;font:14px/1.6 "Microsoft YaHei","PingFang SC",sans-serif;cursor:pointer;text-align:left;transition:.2s}
+.choice-btn:hover{background:rgba(150,130,200,.18);border-color:rgba(150,130,200,.4);color:#fff}
+.choice-btn:active{background:rgba(150,130,200,.25)}
+.choice-btn .choice-num{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;background:rgba(200,170,255,.2);border-radius:50%;font-size:12px;margin-right:8px}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;display:flex;gap:6px;justify-content:center;padding:10px;background:linear-gradient(180deg,transparent,rgba(8,6,16,.95) 30%);z-index:10}
+.bottom-bar button{padding:8px 16px;background:rgba(150,130,200,.1);border:1px solid rgba(150,130,200,.2);border-radius:20px;color:#b0a0d0;font:12px "Microsoft YaHei","PingFang SC",sans-serif;cursor:pointer;transition:.2s}
+.bottom-bar button:hover{background:rgba(150,130,200,.2);border-color:rgba(150,130,200,.4);color:#fff}
+.bottom-bar button:active{background:rgba(150,130,200,.3)}
+.end-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:11px;margin:2px;letter-spacing:2px}
+.end-badge.good{background:rgba(107,203,138,.2);border:1px solid rgba(107,203,138,.4);color:#6bcb8a}
+.end-badge.bad{background:rgba(224,96,96,.15);border:1px solid rgba(224,96,96,.3);color:#e06060}
+.end-badge.normal{background:rgba(128,160,224,.15);border:1px solid rgba(128,160,224,.3);color:#80a0e0}
+@media(max-width:600px){
+body{padding:8px}
+.story-area{font-size:14px;line-height:1.9}
+.choice-btn{font-size:13px}
+.bottom-bar button{padding:10px 14px;font-size:13px}
+}
 </head>
 <body>
 <div class="container">
